@@ -11,8 +11,8 @@
                 <img src="/uploads/<%=facility[i].thumbnail%>" class="card-img-top img-fluid mt-sm-3" alt="...">
                 <div class="card-body">
                   <h5 class="card-title"><%= facility[i].name %></h5>
-                  <a href="/facility/{{ $facility->id }}" class="btn btn-secondary">Detail</a>
-                  <a href="/facility/{{ $facility->id }}/edit" class="btn btn-success">Edit</a>
+                  <a href="/facility/<%=facility[i]._id%>" class="btn btn-secondary">Detail</a>
+                  <a href="/facility/edit/<%=facility[i]._id%>" class="btn btn-success">Edit</a>
                   <form action="/facility/{{ $facility->id }}" method="POST" class="d-inline">
                     
                     <button class="btn btn-danger border-0" onclick="return confirm('are you sure? ')" >Hapus</button>
