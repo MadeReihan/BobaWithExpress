@@ -3,9 +3,10 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const methodOverride = require('method-override')
 
-var UserRouter = require('./app/User/router');
-
+var BelumLoginRouter = require('./app/BelumLogin/router');
+var UserRouter = require('./app/User/router')
 
 var app = express();
 
@@ -13,13 +14,18 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+
+app.use(methodOverride('_method'));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', UserRouter);
+
+app.use('/', BelumLoginRouter);
+app.use('/users',UserRouter)
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
