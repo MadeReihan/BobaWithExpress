@@ -4,17 +4,28 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const methodOverride = require('method-override')
+const session = require('express-session')
+const flash = require('connect-flash')
+var cors = require('cors')
 
 var BelumLoginRouter = require('./app/BelumLogin/router');
 var UserRouter = require('./app/User/router')
+var FacilityRouter = require('./app/Facility/router')
 
 var app = express();
+app.use(cors())
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-
+app.use(session({
+  secret: 'keyboard cat',
+  resave:false,
+  saveUninitialized:true,
+  cookie:{ }
+}));
+app.use(flash());
 app.use(methodOverride('_method'));
 app.use(logger('dev'));
 app.use(express.json());
@@ -25,6 +36,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', BelumLoginRouter);
 app.use('/users',UserRouter)
+app.use('/facility',FacilityRouter)
 
 
 // catch 404 and forward to error handler

@@ -22,8 +22,8 @@
                 <td><%= user[i].email%></td>
                 <td><%= user[i].role%></td>
                 <td>
-                    <form action="/user/delete/<%=user[i]._id %>?_method=DELETE" method="POST">
-                      <a href="/user/edit/<%= user[i]._id %>" class="btn btn-warning"><i class="fas fa-pencil-alt"></i>Ubah</a>
+                    <form action="/users/delete/<%=user[i]._id %>?_method=DELETE" method="POST">
+                      <a href="/users/edit/<%= user[i]._id %>" class="btn btn-warning"><i class="fas fa-pencil-alt"></i>Ubah</a>
                       <button class="btn btn-danger"><i class="fas fa-trash"></i>Hapus</button>
                     </form>
                   </td>

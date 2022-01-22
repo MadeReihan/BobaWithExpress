@@ -31,5 +31,38 @@ module.exports={
         } catch (err) {
             res.redirect('/users')
         }
+    },
+    viewEdit:async(req,res)=>{
+        try {
+            const {id} = req.params
+            const user = await User.findOne({_id:id})
+            res.render('Admin/User/edit',{user})
+        } catch (err) {
+            res.redirect('/users')
+        }
+    },
+    actionEdit:async(req,res)=>{
+        try {
+            const {id} = req.params
+            const {name,email,password,role} = req.body
+            const user = await User.findOneAndUpdate({
+                _id:id
+            },{name,email,password,role});
+            
+            res.redirect('/users');
+        } catch (err) {
+            res.redirect('/users')
+        }
+    },
+    actionDelete:async(req,res)=>{
+        try {
+            const{id} = req.params;
+            const user = await User.findOneAndRemove({
+                _id:id
+            });
+            res.redirect('/users')
+        } catch (err) {
+            res.redirect('/users')
+        }
     }
 }

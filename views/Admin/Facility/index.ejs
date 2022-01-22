@@ -1,0 +1,29 @@
+<%- include ../../partials/header.ejs%>
+<%- include ../../partials/navbar.ejs%>
+
+<div class="container">
+    <h1 class="text-center">List Facility</h1>
+    <a href="/facility/create" class="btn btn-primary">Add Facility</a>
+    <div class="row mt-sm-4">
+        <% for(let i=0; i<facility.length; i++){%>
+        <div class="col-sm-3 mt-sm-2">
+            <div class="card" style="height: auto; ">
+                <img src="/uploads/<%=facility[i].thumbnail%>" class="card-img-top img-fluid mt-sm-3" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title"><%= facility[i].name %></h5>
+                  <a href="/facility/{{ $facility->id }}" class="btn btn-secondary">Detail</a>
+                  <a href="/facility/{{ $facility->id }}/edit" class="btn btn-success">Edit</a>
+                  <form action="/facility/{{ $facility->id }}" method="POST" class="d-inline">
+                    
+                    <button class="btn btn-danger border-0" onclick="return confirm('are you sure? ')" >Hapus</button>
+                  </form>
+                </div>
+            </div>
+        </div>
+        <%}%>
+        
+    </div>
+</div>
+
+
+<%- include ../../partials/footer.ejs%>

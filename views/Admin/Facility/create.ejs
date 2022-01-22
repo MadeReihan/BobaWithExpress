@@ -1,0 +1,56 @@
+<%- include ../../partials/header.ejs%>
+<%- include ../../partials/navbar.ejs%>
+
+<div class="container">
+    <h1 class="text-center">Create New Facility</h1>
+
+   <div class="row justify-content-center">
+       <div class="col-sm-10 ">
+           <form method="POST" action="/facility/create" class="mb-sm-5" enctype="multipart/form-data">
+               <div class="mb-3">
+                 <label for="name" class="form-label">Name</label>
+                 <input type="text" class="form-control" id="name"  name="name" required >
+               </div>
+               <div class="mb-3">
+                   <label for="image" class="form-label">Facility Image</label>
+                   <img class="img-preview img-fluid mb-sm-3 col-sm-5">
+                   <input class="form-control" type="file" id="thumbnail" name="thumbnail" onchange="previewImage()">
+
+               </div>
+         
+               <div class="mb-3">
+                   <label for="body" class="form-label">Body</label>
+                   <input id="body" type="hidden" name="body">
+                   <trix-editor input="body" name="body"></trix-editor>
+               </div>
+       
+       
+               <button type="submit" class="btn btn-primary">Create Facility</button>
+           </form>
+       </div>
+   </div>
+   
+</div>
+
+<script>
+   document.addEventListener('trix-file-accept',function(e){
+   e.preventDefault();
+ })
+
+ function previewImage(){
+   const image = document.querySelector('#image');
+   const imgPreview = document.querySelector('.img-preview');
+   imgPreview.style.display = 'block';
+
+   const oFReader = new FileReader();
+   oFReader.readAsDataURL(image.files[0]);
+
+   oFReader.onload =function(oFREvent){
+     imgPreview.src= oFREvent.target.result;
+   }
+ }
+
+</script>
+
+
+<%- include ../../partials/footer.ejs%>
