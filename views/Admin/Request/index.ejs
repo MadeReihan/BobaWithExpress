@@ -1,0 +1,45 @@
+<%- include ../../partials/header.ejs%>
+<%- include ../../partials/navbar.ejs%>
+
+<div class="container">
+    <h1 class="text-center">ini halaman request admin</h1>
+    <a href="/request/create" class="btn btn-primary">Add Request</a>
+    <div class="row">
+        <div class="col-sm-12 table-responsive">
+            <table class="table table-striped ">
+                <thead>
+                  <tr>
+                    <th >#</th>
+                    <th >Requester</th>
+                    <th >Requester Facility</th>
+                    <th >date</th>
+                    <th >start time</th>
+                    <th >end time</th>
+                    <th >operation</th>
+                  </tr>
+                </thead>
+                <tbody>
+                <% for(let i = 0; i<request.length; i++){%>
+                  <tr>
+                    <th><%= i+1%></th>
+                    <td><%= request[i].user?.name%></td>
+                    <td><%= request[i].facility?.name%></td>
+                    <td><%= request[i].date%></td>
+                    <td><%= request[i].start_time%></td>
+                    <td><%= request[i].end_time%></td>
+                    <td>
+                        <form action="/request/delete/<%=request[i]._id%>?_method=DELETE" method="POST" class="d-inline">
+                        <a href="/request/edit/<%=request[i]._id%>" class="badge bg-success text-decoration-none">Edit</a>
+                        <button class="badge bg-secondary border-0" onclick="return confirm('are you sure? ')" >Delete</button>
+                      </form>
+                    </td>
+                  </tr>
+                <%}%>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<%- include ../../partials/footer.ejs%>

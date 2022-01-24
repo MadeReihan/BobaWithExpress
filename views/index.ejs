@@ -1,12 +1,31 @@
-<%- include ./partials/header.ejs%>
-<%- include ./partials/navbar.ejs%>
+<%- include ./partials/header.ejs %>
+<%- include ./partials/navbar.ejs %>
 
 <div class="container">
-  <h1 class="text-center mb-sm-4" >Welcome</h1>
+  <h1 class="text-center mb-sm-4" >
+    
+    <%if(session == null || session == undefined){%>
+      <h1 class="text-center">Welcome </h1>
+    <%}else{%>
+      <h1 class="text-center">Welcome <%= session.name%></h1>
+    <%}%>
+  </h1>
   <div class="row">
-      
+    <%for(let i=0; i<facility.length; i++){%>
+      <div class="col-sm-4">
+        <div class="card" style="width: auto; height: auto">
+          <img src="uploads/<%=facility[i].thumbnail%>" class="card-img-top img-fluid">
+            <div class="card-body">
+            <h5 class="card-title"><%= facility[i].name%></h5>
+            </div>
+        </div>
+      </div>
+      <%if(i == 2) break;%>
+    <%}%>
   </div>
 </div>
 
 
-<%- include ./partials/header.ejs%>
+
+
+<%- include ./partials/footer.ejs %>

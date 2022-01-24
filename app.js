@@ -11,6 +11,8 @@ var cors = require('cors')
 var BelumLoginRouter = require('./app/BelumLogin/router');
 var UserRouter = require('./app/User/router')
 var FacilityRouter = require('./app/Facility/router')
+var RequestRouter = require('./app/Request/router')
+var AuthRouter = require('./app/Auth/router')
 
 var app = express();
 app.use(cors())
@@ -35,8 +37,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.use('/', BelumLoginRouter);
+app.use('/', AuthRouter);
 app.use('/users',UserRouter)
 app.use('/facility',FacilityRouter)
+app.use('/request',RequestRouter)
 
 
 // catch 404 and forward to error handler

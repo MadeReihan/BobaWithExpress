@@ -6,15 +6,40 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
+          <%if(session == null || session == undefined){%>
+          
+          <%}else if(session.role == "admin"){%>
             <a class="nav-link" href="/users">Users</a>
             <a class="nav-link" href="/facility">Facilities</a>
-            <a class="nav-link" href="/booking">request</a>
+            <a class="nav-link" href="/request">request</a>
+
+          <%}else if(session.role == "management"){%>
+            <a class="nav-link" href="/facility">Facilities</a>
+            <a class="nav-link" href="/request">request</a>
+          
+          <%}else{%>
+              
+              <a class="nav-link" href="/facility">Facilities</a>
+              <a class="nav-link" href="/request">request</a>
+          <%}%>
+            
         
         </div>
         <ul class="navbar-nav ms-sm-auto">
+          <%if(session == null || session == undefined){%>
             <li class="nav-item">
-                <a href="/login" class="nav-link" class="btn-grad"> Login</a>
+              <a href="/login" class="nav-link" class="btn-grad"> Login</a>
             </li>
+          <%}else{%>
+            <li class="nav-item">
+              <a href="#" class="nav-link" class="btn-grad">Welcome back <%= session.name%></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/logout">Logout</a>
+            </li>
+          <%}%>
+            
+          
         </ul>
       </div>
     </div>

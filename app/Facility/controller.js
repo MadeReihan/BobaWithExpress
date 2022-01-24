@@ -7,7 +7,8 @@ module.exports={
         try {
             const facility = await Facility.find()
             res.render('Admin/facility/index',{
-                facility
+                facility,
+                session:req.session.user,
             })
         } catch (err) {
             console.log(err);
@@ -16,7 +17,7 @@ module.exports={
     },
     viewCreate:async(req,res)=>{
         try {
-            res.render('Admin/Facility/create');
+            res.render('Admin/Facility/create',{session:req.session.user,});
         } catch (err) {
             console.log(err);
             res.redirect('/')
@@ -64,7 +65,7 @@ module.exports={
         try {
             const {id} = req.params;
             const facility = await Facility.findOne({_id:id})
-            res.render('Admin/Facility/detail',{facility})
+            res.render('Admin/Facility/detail',{session:req.session.user,})
         } catch (err) {
             console.log(err);
             res.redirect('/')
@@ -75,7 +76,7 @@ module.exports={
             const {id} = req.params;
             const facility = await Facility.findOne({_id:id})
             console.log(facility);
-            res.render('Admin/Facility/edit',{facility})
+            res.render('Admin/Facility/edit',{session:req.session.user,})
         } catch (err) {
             console.log(err);
             res.redirect('/')

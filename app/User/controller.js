@@ -5,7 +5,8 @@ module.exports={
         try {
             const user = await User.find()
             res.render('Admin/User/index',{
-                user
+                user,
+                session:req.session.user,
             })
         } catch (err) {
             console.log(err);
@@ -14,7 +15,7 @@ module.exports={
     },
     viewCreate:async(req,res) => {
         try {
-            res.render('Admin/User/create')
+            res.render('Admin/User/create',{session:req.session.user,})
         } catch (err) {
             res.redirect('/users')
         }
@@ -36,7 +37,7 @@ module.exports={
         try {
             const {id} = req.params
             const user = await User.findOne({_id:id})
-            res.render('Admin/User/edit',{user})
+            res.render('Admin/User/edit',{user,session:req.session.user,})
         } catch (err) {
             res.redirect('/users')
         }

@@ -1,0 +1,46 @@
+<%- include ../../partials/header.ejs%>
+<%- include ../../partials/navbar.ejs%>
+
+<div class="container">
+    <h1 class="text-center">Book Facility</h1>
+
+   <div class="row justify-content-center">
+       <div class="col-sm-10 ">
+           <form method="POST" action="/request/create" class="mb-sm-5" >
+               
+               <div class="mb-3">
+                 <label for="facility" class="form-label">facility</label>
+                 <select class="form-select" name="facility">
+                    <option selected="selected">Pilih Facility</option>
+                     <%for(let i=0; i<facility.length; i++){%>
+                     <option value="<%= facility[i]._id%>" ><%= facility[i].name%></option> 
+                     <%}%> 
+                 </select>
+               </div>
+               
+
+               <div class="mb-3">
+                 <label for="date" class="form-label">Date</label>
+                 <input type="date" class="form-control " id="date"  name="date" required >
+                 
+               </div>
+               <div class="mb-3">
+                 <label for="start_time" class="form-label">start_time</label>
+                 <input type="time" class="form-control " id="start_time"  name="start_time" required ">
+
+               </div>
+               <div class="mb-3">
+                 <label for="end_time" class="form-label">end_time</label>
+                 <input type="time" class="form-control " id="end_time"  name="end_time" required >
+                 
+               </div>
+       
+               <button type="submit" class="btn btn-primary">Book Facility</button>
+           </form>
+       </div>
+   </div>
+   
+</div>
+
+
+<%- include ../../partials/footer.ejs%>
