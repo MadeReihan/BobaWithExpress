@@ -1,0 +1,10 @@
+<% if(alert.message != ""){%>
+    <div>
+        <script>
+             Swal.fire({
+            icon: '<%= alert.status %>',
+            text: '<%= alert.message %>',
+          }) 
+        </script>
+    </div>
+<%}%>

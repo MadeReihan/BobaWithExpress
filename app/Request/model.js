@@ -6,8 +6,8 @@ let requestSchema = mongoose.Schema({
         ref:'Facility'
     },
     user:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref:'User'
+        type:String,
+        require:true
     },
     date:{
         type:String,

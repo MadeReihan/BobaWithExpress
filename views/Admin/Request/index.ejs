@@ -3,7 +3,12 @@
 
 <div class="container">
     <h1 class="text-center">ini halaman request admin</h1>
-    <a href="/request/create" class="btn btn-primary">Add Request</a>
+    <%- include ../../partials/message.ejs %>
+    <%if(session.role == "admin" || session.role == "user"){ %>
+      <a href="/request/create" class="btn btn-primary">Add Request</a>
+    <%}else{%>
+      <div></div>
+    <%}%>
     <div class="row">
         <div class="col-sm-12 table-responsive">
             <table class="table table-striped ">
@@ -22,7 +27,7 @@
                 <% for(let i = 0; i<request.length; i++){%>
                   <tr>
                     <th><%= i+1%></th>
-                    <td><%= request[i].user?.name%></td>
+                    <td><%= request[i].user%></td>
                     <td><%= request[i].facility?.name%></td>
                     <td><%= request[i].date%></td>
                     <td><%= request[i].start_time%></td>
