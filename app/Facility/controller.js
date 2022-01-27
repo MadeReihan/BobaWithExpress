@@ -9,7 +9,7 @@ module.exports={
             const alertMessage = req.flash("alertMessage")
             const alertStatus = req.flash("alertStatus")
             const alert = {message:alertMessage, status:alertStatus}
-            res.render('Admin/facility/index',{
+            res.render('Admin/Facility/index',{
                 facility,
                 alert,
                 session:req.session.user,
