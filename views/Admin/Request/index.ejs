@@ -2,7 +2,7 @@
 <%- include ../../partials/navbar.ejs%>
 
 <div class="container">
-    <h1 class="text-center">ini halaman request admin</h1>
+    <h1 class="text-center">Request</h1>
     <%- include ../../partials/message.ejs %>
     <%if(session.role == "admin" || session.role == "user"){ %>
       <a href="/request/create" class="btn btn-primary">Add Request</a>
@@ -17,29 +17,48 @@
                     <th >#</th>
                     <th >Requester</th>
                     <th >Requester Facility</th>
-                    <th >date</th>
-                    <th >start time</th>
-                    <th >end time</th>
-                    <th >operation</th>
+                    <th >Date</th>
+                    <th >Start time</th>
+                    <th >End time</th>
+                    <th >Operation</th>
+                    <th >Status</th>
                   </tr>
                 </thead>
                 <tbody>
-                <% for(let i = 0; i<request.length; i++){%>
-                  <tr>
-                    <th><%= i+1%></th>
-                    <td><%= request[i].user%></td>
-                    <td><%= request[i].facility?.name%></td>
-                    <td><%= request[i].date%></td>
-                    <td><%= request[i].start_time%></td>
-                    <td><%= request[i].end_time%></td>
-                    <td>
-                        <form action="/request/delete/<%=request[i]._id%>?_method=DELETE" method="POST" class="d-inline">
-                        <a href="/request/edit/<%=request[i]._id%>" class="badge bg-success text-decoration-none">Edit</a>
-                        <button class="badge bg-secondary border-0" onclick="return confirm('are you sure? ')" >Delete</button>
-                      </form>
-                    </td>
-                  </tr>
-                <%}%>
+                    <% for(let i = 0; i<request.length; i++){%>
+                      <tr>
+                        <th><%= i+1%></th>
+                        <td><%= request[i].user%></td>
+                        <td><%= request[i].facility?.name%></td>
+                        <td><%= request[i].date%></td>
+                        <td><%= request[i].start_time%></td>
+                        <td><%= request[i].end_time%></td>
+                        <td>
+                          <%if(session.role == "admin"){ %>
+                            <form action="/request/delete/<%=request[i]._id%>?_method=DELETE" method="POST" class="d-inline">
+                              <button class="badge bg-secondary border-0" onclick="return confirm('are you sure? ')" >Delete</button>
+                            </form>
+                          <%}else if(session.role == "user"){%>
+                            Waiting
+                          <%}else{%>
+                            <%if(request[i].status == 'Waiting Management'){%>
+                              <form action="/request/status/<%=request[i]._id %>?status=reject&_method=PUT" method="POST" style="display: inline-block;">
+                                <button class="btn btn-danger"><i class="fas fa-times-circle"></i> Tolak</button>
+                              </form>
+                              <form action="/request/status/<%=request[i]._id %>?status=apply&_method=PUT" method="POST" style="display: inline-block;">
+                                <button class="btn btn-info"><i class="fas fa-check-circle"></i> Terima</button>
+                              </form>
+                            <%}else if(request[i].status == 'apply'){%>
+                              Apply
+                            <%}else{%>
+                              Reject
+                            <%}%>
+
+                          <%}%>
+                        </td>
+                        <td><%= request[i].status%></td>
+                      </tr>
+                    <%}%>
                 </tbody>
             </table>
         </div>

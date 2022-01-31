@@ -21,6 +21,11 @@ let requestSchema = mongoose.Schema({
         type:String,
         require:[true,"jam akhir tidak boleh kosong"]
     },
+    status:{
+        type:String,
+        enum:['reject','apply','Waiting Management'],
+        default:'Waiting Management'
+    },
     
 
 

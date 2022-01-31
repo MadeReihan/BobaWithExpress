@@ -1,6 +1,12 @@
-
+body{
+  font-family: 'Poppins', sans-serif !important;
+}
+.navbar-nav a, .navbar-brand{
+  color: black !important;
+}
 
 /* login register */
+
 .bd-placeholder-img {
     font-size: 1.125rem;
     text-anchor: middle;
